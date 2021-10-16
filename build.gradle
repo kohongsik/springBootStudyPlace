@@ -33,7 +33,7 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-aop')
     compile('org.springframework.boot:spring-boot-starter-jdbc')
     // Mybatis
-    compile('org.mybatis.spring.boot:mybatis-spring-boot-starter')
+    compile('org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.0')
     // DB
     compile('mysql:mysql-connector-java')
     // LOMBOK
