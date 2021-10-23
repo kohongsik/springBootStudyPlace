@@ -1,3 +1,5 @@
+package com.hs.springboot.study;
+
 import com.hs.springboot.study.Application;
 import com.hs.springboot.study.configuration.DatabaseConfiguration;
 import org.junit.Test;
@@ -9,7 +11,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = Application.class)
+@SpringBootTest
 public class ApplicationTests {
     @Autowired
     private SqlSessionTemplate sqlSession;
