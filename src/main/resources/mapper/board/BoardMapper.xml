@@ -19,4 +19,67 @@
             AND IFNULL(DELETE_YN, 'N') = 'N'
         ORDER BY BOARD_IDX DESC
     </select>
+    <select id="selectBoardDetail" resultType="com.hs.springboot.study.board.entity.BoardVO">
+        SELECT
+            BOARD_IDX
+             , TITLE
+             , CONTENTS
+             , HIT_CNT
+             , CREATE_DATE
+             , CREATE_USER_ID
+             , UPDATE_DATE
+             , UPDATE_USER_ID
+             , DELETE_YN
+        FROM T_BOARD T
+        WHERE 1 = 1
+            AND IFNULL(DELETE_YN, 'N') = 'N'
+            AND BOARD_IDX = #{boardIdx}
+        ORDER BY BOARD_IDX DESC
+    </select>
+    <insert id="insertBoard">
+        INSERT INTO T_BOARD
+        (
+            TITLE
+            , CONTENTS
+            , HIT_CNT
+            , CREATE_DATE
+            , CREATE_USER_ID
+            , UPDATE_DATE
+            , UPDATE_USER_ID
+            , DELETE_YN
+        )
+        VALUES (
+            #{title}
+            , #{contents}
+            , 0
+            , CURRENT_TIMESTAMP
+            , IFNULL(#{createUserId}, 'anonymous')
+            , CURRENT_TIMESTAMP
+            , IFNULL(#{updateUserId}, 'anonymous')
+            , 'N'
+        )
+    </insert>
+    <update id="updateHitCnt">
+        UPDATE T_BOARD
+            SET HIT_CNT = HIT_CNT + 1
+        WHERE 1 = 1
+            AND BOARD_IDX = #{boardIdx}
+    </update>
+    <update id="updateBoard">
+        UPDATE T_BOARD
+            SET TITLE = #{title}
+                , CONTENTS = #{contents}
+                , UPDATE_USER_ID = IFNULL(#{updateUserId}, 'anonymous')
+                , UPDATE_DATE = CURRENT_TIMESTAMP
+        WHERE 1 = 1
+            AND BOARD_IDX = #{boardIdx}
+    </update>
+    <update id="deleteBoard">
+        UPDATE T_BOARD
+        SET DELETE_YN = 'Y'
+          , UPDATE_USER_ID = IFNULL(#{updateUserId}, 'anonymous')
+          , UPDATE_DATE = CURRENT_TIMESTAMP
+        WHERE 1 = 1
+          AND BOARD_IDX = #{boardIdx}
+    </update>
 </mapper>

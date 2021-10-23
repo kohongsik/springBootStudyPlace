@@ -7,4 +7,8 @@ import java.util.List;
 
 public interface BoardService {
     List<BoardVO> selectBoardList(BoardSearchVO boardSearchVO);
+    int insertBoard(BoardVO boardVO);
+    BoardVO selectBoardDetail(BoardSearchVO boardSearchVO);
+    int updateBoard(BoardVO boardVO);
+    int deleteBoard(BoardVO boardVO);
 }
