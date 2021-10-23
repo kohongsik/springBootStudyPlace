@@ -38,6 +38,7 @@ dependencies {
     compile('mysql:mysql-connector-java')
     // LOMBOK
     compile('org.projectlombok:lombok')
+    annotationProcessor('org.projectlombok:lombok')
     // TEST
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }

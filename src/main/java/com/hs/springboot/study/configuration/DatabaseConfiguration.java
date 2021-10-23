@@ -40,11 +40,19 @@ public class DatabaseConfiguration {
                         "classpath:/mapper/**/*.xml"
                 )
         );
+        sqlSessionFactoryBean.setConfiguration(mybatisConfig());
         return sqlSessionFactoryBean.getObject();
     }
     @Bean
     public SqlSessionTemplate sqlSessionTemplate (SqlSessionFactory sqlSessionFactory) {
         return new SqlSessionTemplate(sqlSessionFactory);
+    }
+
+    // mybatis underscore > camecase mapping 설정 적용
+    @Bean
+    @ConfigurationProperties(prefix="mybatis.configuration")
+    public org.apache.ibatis.session.Configuration mybatisConfig () {
+        return new org.apache.ibatis.session.Configuration();
     }
 
 }

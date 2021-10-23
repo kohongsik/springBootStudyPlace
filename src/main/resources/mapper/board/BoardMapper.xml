@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hs.springboot.study.board.mapper.BoardMapper">
+    <select id="selectBoardList" resultType="com.hs.springboot.study.board.entity.BoardVO">
+        SELECT
+            BOARD_IDX
+            , TITLE
+            , CONTENTS
+            , HIT_CNT
+            , CREATE_DATE
+            , CREATE_USER_ID
+            , UPDATE_DATE
+            , UPDATE_USER_ID
+            , DELETE_YN
+        FROM T_BOARD T
+        WHERE 1 = 1
+            AND IFNULL(DELETE_YN, 'N') = 'N'
+        ORDER BY BOARD_IDX DESC
+    </select>
+</mapper>
