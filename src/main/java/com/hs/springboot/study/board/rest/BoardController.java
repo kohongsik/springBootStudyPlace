@@ -3,6 +3,9 @@ package com.hs.springboot.study.board.rest;
 import com.hs.springboot.study.board.app.BoardService;
 import com.hs.springboot.study.board.entity.BoardSearchVO;
 import com.hs.springboot.study.board.entity.BoardVO;
+import com.mysql.cj.log.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,13 +20,14 @@ import java.util.List;
 @Controller
 @RequestMapping(value = "/board")
 public class BoardController {
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     BoardService boardService;
 
     @RequestMapping(value = "/openBoardList.do")
     public ModelAndView openBoardList() throws Exception {
         ModelAndView mv = new ModelAndView("/board/boardList");
-
+        logger.debug("open Board list");
         List<BoardVO> list = boardService.selectBoardList(BoardSearchVO.builder().build());
         mv.addObject("list", list);
 
