@@ -20,7 +20,7 @@ import java.util.List;
 @Controller
 @RequestMapping(value = "/board")
 public class BoardController {
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+    private Logger logger = LoggerFactory.getLogger("board");
     @Autowired
     BoardService boardService;
 

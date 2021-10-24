@@ -9,12 +9,14 @@ import javax.servlet.http.HttpServletRequest;
 
 @ControllerAdvice
 public class ExceptionHandler {
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+    private Logger logger = LoggerFactory.getLogger("board");
 
     @org.springframework.web.bind.annotation.ExceptionHandler(Exception.class)
     public ModelAndView defaultExceptionHandler(HttpServletRequest request, Exception exception) {
         ModelAndView mv = new ModelAndView("/error/error_default");
         mv.addObject("exception", exception);
+        // error log table < insert
+        // error
         logger.error("exception", exception);
         return mv;
     }
