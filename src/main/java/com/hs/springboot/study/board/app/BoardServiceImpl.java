@@ -3,16 +3,18 @@ package com.hs.springboot.study.board.app;
 import com.hs.springboot.study.board.entity.BoardSearchVO;
 import com.hs.springboot.study.board.entity.BoardVO;
 import com.hs.springboot.study.board.mapper.BoardMapper;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
 @Service
 @Transactional
+@RequiredArgsConstructor
 public class BoardServiceImpl implements BoardService{
-    @Autowired
-    BoardMapper boardMapper;
+    final BoardMapper boardMapper;
     @Override
     public List<BoardVO> selectBoardList(BoardSearchVO boardSearchVO) {
         return boardMapper.selectBoardList(boardSearchVO);

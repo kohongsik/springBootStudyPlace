@@ -13,7 +13,9 @@ public class LoggerAspect {
     private Logger logger = LoggerFactory.getLogger("aspect");
     // 기능이 실행될 시점 .. 어드바이스 정의
     // execution : 포인트컷 표현식으로 적용할 메서드를 명시할때 사용.
-    @Around("execution(* com.hs.springboot.study.board..rest.*Controller.*(..)) || execution(* com.hs.springboot.study.board..app.*Impl.*(..)) || execution(* com.hs.springboot.study.board..mapper.*Mapper.*(..))")
+    @Around("execution(* com.hs.springboot.study.board..rest.*Controller.*(..)) || " +
+            "execution(* com.hs.springboot.study.board..app.*Impl.*(..)) || " +
+            "execution(* com.hs.springboot.study.board..mapper.*Mapper.*(..))")
     public Object logPrint(ProceedingJoinPoint joinPoint) throws Throwable {
         String type = "";
         String name = joinPoint.getSignature().getDeclaringTypeName();

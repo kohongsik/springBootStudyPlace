@@ -4,6 +4,7 @@ import com.hs.springboot.study.board.app.BoardService;
 import com.hs.springboot.study.board.entity.BoardSearchVO;
 import com.hs.springboot.study.board.entity.BoardVO;
 import com.mysql.cj.log.LogFactory;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +20,10 @@ import java.util.List;
 
 @Controller
 @RequestMapping(value = "/board")
+@RequiredArgsConstructor
 public class BoardController {
     private Logger logger = LoggerFactory.getLogger("board");
-    @Autowired
-    BoardService boardService;
+    final BoardService boardService;
 
     @RequestMapping(value = "/openBoardList.do")
     public ModelAndView openBoardList() throws Exception {
