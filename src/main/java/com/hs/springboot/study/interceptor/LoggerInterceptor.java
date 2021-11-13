@@ -3,16 +3,11 @@ package com.hs.springboot.study.interceptor;
 import org.apache.tomcat.websocket.AuthenticationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpRequest;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Arrays;
-import java.util.List;
-@CrossOrigin(origins="http://localhost:9090")
 public class LoggerInterceptor extends HandlerInterceptorAdapter {
     Logger logger = LoggerFactory.getLogger("board");
     @Override
