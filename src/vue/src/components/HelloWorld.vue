@@ -35,6 +35,10 @@ export default {
   name: 'HelloWorld',
   props: {
     msg: String
+  },
+  created () {
+    this.log('드디어 된건가.. ㅎ')
+    this.log(this.$data.state) // mixins에 변수 참조할떄 .. 
   }
 }
 </script>
