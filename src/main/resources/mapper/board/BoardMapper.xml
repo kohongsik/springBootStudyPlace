@@ -36,6 +36,23 @@
             AND BOARD_IDX = #{boardIdx}
         ORDER BY BOARD_IDX DESC
     </select>
+    <select id="selectBoardDetailRecentOne" resultType="com.hs.springboot.study.board.entity.BoardVO">
+        SELECT
+            BOARD_IDX
+             , TITLE
+             , CONTENTS
+             , HIT_CNT
+             , CREATE_DATE
+             , CREATE_USER_ID
+             , UPDATE_DATE
+             , UPDATE_USER_ID
+             , DELETE_YN
+        FROM T_BOARD T
+        WHERE 1 = 1
+          AND IFNULL(DELETE_YN, 'N') = 'N'
+        ORDER BY BOARD_IDX DESC
+        LIMIT 1
+    </select>
     <insert id="insertBoard">
         INSERT INTO T_BOARD
         (
@@ -81,5 +98,73 @@
           , UPDATE_DATE = CURRENT_TIMESTAMP
         WHERE 1 = 1
           AND BOARD_IDX = #{boardIdx}
+    </update>
+    <select id="selectBoardFileList" resultType="com.hs.springboot.study.board.entity.BoardFileVO">
+        SELECT
+            IDX
+            , BOARD_IDX
+            , ORIGINAL_FILE_NAME
+            , STORED_FILE_PATH
+            , FORMAT(ROUND(FILE_SIZE / 1024), 0) AS FILE_SIZE
+            , CREATE_DATE
+            , CREATE_USER_ID
+            , UPDATE_DATE
+            , UPDATE_USER_ID
+            , DELETE_YN
+        FROM T_FILE
+        WHERE 1 = 1
+            AND BOARD_IDX = #{boardIdx}
+            AND DELETE_YN != 'Y'
+    </select>
+    <select id="selectBoardFileDetail" resultType="com.hs.springboot.study.board.entity.BoardFileVO">
+        SELECT
+            IDX
+             , BOARD_IDX
+             , ORIGINAL_FILE_NAME
+             , STORED_FILE_PATH
+             , FORMAT(ROUND(FILE_SIZE / 1024), 0) AS FILE_SIZE
+             , CREATE_DATE
+             , CREATE_USER_ID
+             , UPDATE_DATE
+             , UPDATE_USER_ID
+             , DELETE_YN
+        FROM T_FILE
+        WHERE 1 = 1
+          AND BOARD_IDX = #{boardIdx}
+          AND IDX = #{idx}
+          AND DELETE_YN != 'Y'
+    </select>
+    <insert id="createBoardFile">
+        INSERT INTO T_FILE
+        (
+            BOARD_IDX
+            , ORIGINAL_FILE_NAME
+            , STORED_FILE_PATH
+            , FILE_SIZE
+            , CREATE_DATE
+            , CREATE_USER_ID
+            , UPDATE_DATE
+            , UPDATE_USER_ID
+            , DELETE_YN
+        ) VALUES (
+            #{boardIdx}
+            , #{originalFileName}
+            , #{storedFilePath}
+            , #{fileSize}
+            , CURRENT_TIMESTAMP
+            , IFNULL(#{createUserId}, 'anonymous')
+            , CURRENT_TIMESTAMP
+            , IFNULL(#{updateUserId}, 'anonymous')
+            , #{deleteYn}
+        )
+    </insert>
+    <update id="deleteBoardFile">
+        UPDATE T_FILE
+        SET
+            DELETE_YN = 'Y'
+            , UPDATE_USER_ID = IFNULL(#{updateUserId}, 'anonymous')
+            , UPDATE_DATE = CURRENT_TIMESTAMP
+        WHERE 1 = 1
+            AND BOARD_IDX = #{boardIdx}
     </update>
 </mapper>

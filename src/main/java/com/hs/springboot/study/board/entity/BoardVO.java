@@ -3,6 +3,8 @@ package com.hs.springboot.study.board.entity;
 import com.hs.springboot.study.common.entity.CommonVO;
 import lombok.*;
 
+import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -14,4 +16,5 @@ public class BoardVO extends CommonVO {
     private String contents;
     private String hitCnt;
     private String deleteYn;
+    List<BoardFileVO> boardFileVOList;
 }

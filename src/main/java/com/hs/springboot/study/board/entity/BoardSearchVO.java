@@ -14,4 +14,5 @@ public class BoardSearchVO extends CommonSearchVO {
     private String contents;
     private String hitCnt;
     private String deleteYn;
+    private String idx;
 }
