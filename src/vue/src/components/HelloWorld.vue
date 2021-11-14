@@ -31,12 +31,12 @@ export default {
       })
       this.data = res || {}
     },
-    postApiCall () {
-      const res = this.axios({
+    async postApiCall () {
+      const res = await this.axios({
         method: 'post',
         url: this.url
       })
-      this.data = res
+      this.data = res || {}
     },
   }
 }
