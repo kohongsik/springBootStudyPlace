@@ -2,7 +2,10 @@ package com.hs.springboot.study.configuration;
 
 import com.hs.springboot.study.interceptor.LoggerInterceptor;
 import com.hs.springboot.study.interceptor.TestInterceptor;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -24,5 +27,11 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 
 
     }
-
+    @Bean
+    public MultipartResolver multipartResolver () {
+        CommonsMultipartResolver commonsMultipartResolver = new CommonsMultipartResolver();
+        commonsMultipartResolver.setDefaultEncoding("UTF-8");
+        commonsMultipartResolver.setMaxInMemorySize(5 * 1024 * 1024); // 5mb
+        return commonsMultipartResolver;
+    }
 }
