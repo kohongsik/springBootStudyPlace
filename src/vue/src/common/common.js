@@ -9,7 +9,11 @@ export default ({
                 ? this.reqeustGetMethod(obj)
                 : method === 'post' 
                     ? this.requestPostMethod(obj)
-                    : {}
+                    : method === 'put'
+                        ? this.requestPutMethod(obj)
+                        : method === 'delete'
+                            ? this.requestdDeleteMethod(obj)
+                            : {}
         },
         async reqeustGetMethod (obj = {}) {
             const params = obj.params || {}
@@ -20,7 +24,7 @@ export default ({
                     if (entry) {
                         entry = entry + '&'
                     } 
-                    entry = entry + 'key=' + params[key]
+                    entry = entry + key + '=' + params[key]
                     return entry
                 }, '')
                 url += '/?' + queryString
@@ -41,6 +45,34 @@ export default ({
             const data = obj.data || {}
             let resp = {}
             await axios.post(obj.url,
+                { ...data })
+                .then((response) => {
+                    resp = response
+                })
+                .catch((e) => {
+                    console.log('error : ', e)
+                    alert(e)
+                })
+            return resp
+        },
+        async requestPutMethod (obj = {}) {
+            const data = obj.data || {}
+            let resp = {}
+            await axios.put(obj.url,
+                { ...data })
+                .then((response) => {
+                    resp = response
+                })
+                .catch((e) => {
+                    console.log('error : ', e)
+                    alert(e)
+                })
+            return resp
+        },
+        async requestdDeleteMethod (obj = {}) {
+            const data = obj.data || {}
+            let resp = {}
+            await axios.delete(obj.url,
                 { ...data })
                 .then((response) => {
                     resp = response

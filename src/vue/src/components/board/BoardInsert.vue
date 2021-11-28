@@ -33,22 +33,60 @@ export default {
         }
     },
     computed: {
-        
+        newTf () {
+            return !((this.$router.currentRoute.value.query || {}).boardIdx || '')
+        }
+    },
+    mounted () {
+        if (!this.newTf) {
+            this.getInfo()
+        }
     },
     methods: {
+        async getInfo () {
+            const boardIdx = (this.$router.currentRoute.value.query || {}).boardIdx || ''
+            if (!boardIdx) {
+                await alert('삭제된 데이터 입니다.')
+                this.goto('/board') 
+            }
+            const res = await this.axios({
+                method: 'get',
+                url: '/api/board/detail',
+                params: {
+                    modify: true,
+                    boardIdx
+                }
+            })  
+            const data = res.data || {}
+            Object.assign(this.obj, data)
+        },
         async write() {
-            if (!await confirm('생성 하시겠습니까 ?')) {
+            let msg = '생성하시겠습니까?'
+            let retMsg = '게시글이 등록되었습니다.'
+            let method = 'post'
+            let url = '/api/board/insert'
+            if (!this.newTf) {
+                msg = '수정하시겠습니까?'
+                retMsg = '게시글이 수정되었습니다.'
+                method = 'put'
+                url = '/api/board/update'
+            }
+            if (!await confirm(msg)) {
                 return
             }
             await this.axios({
-                method: 'post',
-                url: '/api/board/insert',
+                method,
+                url,
                 data: {
                     ...this.obj
                 }
             })
-            await alert('게시글이 등록되었습니다.')
-            this.goto('/board')
+            await alert(retMsg)
+            if (this.newTf) {
+                this.goto('/board')
+            } else {
+                this.goto('/board/detail', { boardIdx: this.obj.boardIdx })
+            }
         }
     }
 }
