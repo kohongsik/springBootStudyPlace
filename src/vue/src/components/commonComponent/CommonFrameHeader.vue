@@ -1,6 +1,7 @@
 <template>
   <div>
-      <h1 class="title">HEADER</h1>
+      <h1 class="title">BOARD HEADER</h1>
+      <router-view></router-view>
   </div>
 </template>
 

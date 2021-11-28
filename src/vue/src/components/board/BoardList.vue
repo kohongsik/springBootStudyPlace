@@ -24,14 +24,14 @@
                     <template v-else>
                         <tr v-for="data in list" :key="data.idx">
                             <td>{{ data.boardIdx }}</td>
-                            <td><a @click="getList">{{ data.title }}</a></td>
+                            <td><a @click="() => detail(data)">{{ data.title }}</a></td>
                             <td>{{ data.hitCnt }}</td>
                             <td>{{ data.createDate }}</td>
                         </tr>
                     </template>
                 </tbody>
             </table>
-            <!-- <a href="/board/openBoardWrite.do" class="btn">글 쓰기</a> -->
+            <input type="button" value="글쓰기" @click="write" />
         </div>
     </div>
 </template>
@@ -58,6 +58,12 @@ export default {
             })
             const list = res.data || []
             this.list = list
+        },
+        detail (data = {}) {
+            this.goto('/board/detail', { boardIdx: data.boardIdx })
+        },
+        write () {
+            this.goto('/board/insert')
         }
     }
 }

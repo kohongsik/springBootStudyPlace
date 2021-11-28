@@ -18,6 +18,7 @@ export default {
     },
     created () {
         console.log('sample start ')
+        this.goto('/board/list', { boardIdx: 14 })
     },
     methods: {
         async getRequest () {

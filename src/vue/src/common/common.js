@@ -50,6 +50,9 @@ export default ({
                     alert(e)
                 })
             return resp
+        },
+        goto (url = '', params = {}) {
+            this.$router.push({path: url, query: params})
         }
     }
 })

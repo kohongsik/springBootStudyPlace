@@ -15,16 +15,26 @@ const routes = [
     {
         path: '/board',
         name: 'board',
-        component: () => import('../components/board/BoardList.vue'),
+        component: () => import('../components/commonComponent/CommonFrameHeader.vue'),
         children: [
-            // {
-            //     path: '/',
-            //     component: () => import('../components/board/BoardList.vue')
-            // },
+            {
+                path: '',
+                redirect: '/board/list'
+            },
             {
                 path: 'list',
                 name: 'boardList',
                 component: () => import('../components/board/BoardList.vue')
+            },
+            {
+                path: 'detail',
+                name: 'boardDetail',
+                component: () => import('../components/board/BoardDetail.vue')
+            },
+            {
+                path: 'insert',
+                name: 'boardInsert',
+                component: () => import('../components/board/BoardInsert.vue')
             }
         ]
     }
